@@ -37,13 +37,39 @@
             h: field.h,
             draw: function(){
                 canvasCtx.fillStyle = '#fff'
-            canvasCtx.fillRect(
-                field.w / 2 - this.w / 2,
-                 0,
-                  this.w, 
-                  field.h
-                  )
+                canvasCtx.fillRect(
+                field.w / 2 - this.w / 2, 0, this.w, field.h)
             },
+        }
+
+        const leftPaddle = {
+            draw: function(){
+                canvasCtx.fillStyle = '#fff'
+                canvasCtx.fillRect(
+                gapX, 240, line.w, 200
+            )
+            }
+        }
+
+        const rightPaddle = {
+            draw: function(){
+                canvasCtx.fillStyle = '#fff'
+                canvasCtx.fillRect(
+                field.w - line.w - gapX, 200, line.w, 200
+            )
+            }
+        }
+
+        const ball = {
+            x: 120,
+            y: 240,
+            r: 20,
+            draw: function(){
+                canvasCtx.fillStyle = '#fff'
+                canvasCtx.beginPath()
+                canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
+                canvasCtx.fill()
+            }
         }
 
         function setup(){
@@ -56,22 +82,12 @@
             field.draw()
 
             line.draw()
+
+            leftPaddle.draw()
+
+            rightPaddle.draw()
             
-            //raquete esquerda
-            canvasCtx.fillStyle = '#fff'
-            canvasCtx.fillRect(
-                gapX, 240, lineWidth, 200
-            )
-            //raquete direita
-            canvasCtx.fillStyle = '#fff'
-            canvasCtx.fillRect(
-                window.innerWidth - lineWidth - gapX, 200, lineWidth, 200
-            )
-            //bola
-            canvasCtx.fillStyle = '#fff'
-            canvasCtx.beginPath()
-            canvasCtx.arc(120, 240, 20, 0, 2 * Math.PI, false)
-            canvasCtx.fill()
+            ball.draw()
         }
 
         setup()
